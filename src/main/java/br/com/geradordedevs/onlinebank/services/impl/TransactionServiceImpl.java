@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -23,5 +24,11 @@ public class TransactionServiceImpl implements TransactionService {
     public TransactionEntity save(TransactionEntity transactionEntity) {
         log.info("save new transaction in db: {}" , transactionEntity);
         return transactionRepository.save(transactionEntity);
+    }
+
+    @Override
+    public List<TransactionEntity> getAll() {
+        log.info("find all transaction by ");
+        return transactionRepository.findAll();
     }
 }

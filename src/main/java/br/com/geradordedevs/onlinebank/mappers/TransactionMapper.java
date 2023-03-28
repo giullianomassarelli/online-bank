@@ -27,10 +27,13 @@ public class TransactionMapper {
         return modelMapper.map(transactionEntity, TransactionResponseDTO.class);
     }
 
-    public List<TransactionResponseDTO> convertTransactionEntityListToTransactionResponseDTOList(List<TransactionEntity> transactionEntityList) {
+    public List<TransactionResponseDTO> convertTransactionEntityListToTransactionResponseDTOList(List<TransactionEntity> transactionEntityList, String email) {
         List<TransactionResponseDTO> list = new ArrayList<>();
+        log.info("convert list entity to list response dto");
         for(TransactionEntity transactionEntity : transactionEntityList){
-            list.add(convertTransactionEntityToTransactionResponseDTO(transactionEntity));
+            if (transactionEntity.getPayerEmail().equals(email)) {
+                list.add(convertTransactionEntityToTransactionResponseDTO(transactionEntity));
+            }
         }
         return list;
     }
