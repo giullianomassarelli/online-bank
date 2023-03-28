@@ -7,6 +7,5 @@ import java.util.List;
 public interface TransactionService {
 
     TransactionEntity save (TransactionEntity transactionEntity);
-
     List<TransactionEntity> getAll();
 }

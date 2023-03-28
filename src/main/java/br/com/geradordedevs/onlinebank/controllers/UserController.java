@@ -1,13 +1,10 @@
 package br.com.geradordedevs.onlinebank.controllers;
 
-import br.com.geradordedevs.onlinebank.dtos.requests.TransactionRequestDTO;
 import br.com.geradordedevs.onlinebank.dtos.requests.UserRequestDTO;
-import br.com.geradordedevs.onlinebank.dtos.responses.BalanceResponseDTO;
-import br.com.geradordedevs.onlinebank.dtos.responses.TransactionResponseDTO;
-import br.com.geradordedevs.onlinebank.dtos.responses.UserResponseDTO;
+import br.com.geradordedevs.onlinebank.dtos.responses.api.BalanceResponseDTO;
+import br.com.geradordedevs.onlinebank.dtos.responses.api.UserResponseDTO;
 import br.com.geradordedevs.onlinebank.facades.UserFacade;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +18,7 @@ public class UserController {
 
     @Autowired
     private UserFacade userFacade;
+
     @PostMapping
     @Operation(summary = "create new user")
     public ResponseEntity<UserResponseDTO> create (@RequestBody UserRequestDTO userRequestDTO){
@@ -43,13 +41,6 @@ public class UserController {
     @Operation(summary = "consulting account balance")
     public ResponseEntity<BalanceResponseDTO> getAccountBalance (@RequestHeader(value = "email") String email){
         return new ResponseEntity<>(userFacade.getAccountBalance(email), HttpStatus.OK);
-    }
-
-    @PostMapping("/transaction")
-    @Operation(summary = "create new transaction")
-    public ResponseEntity<TransactionResponseDTO> createTransaction (@RequestBody TransactionRequestDTO transactionRequestDTO,
-                                                                     @RequestHeader(value = "email") String email){
-        return new ResponseEntity<>(userFacade.createTransaction(transactionRequestDTO, email), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping

@@ -13,6 +13,7 @@ public enum TransactionExceptionEnum {
     UNAUTHORIZED_PAYMENT("BNK_USR_004", "unauthorized payment", 401),
     OPERATION_NOT_ALLOWED("BNK_USR_005", "operation not allowed to storeUser ", 405),
     INVALID_TRANSACTION_VALUE("BNK_USR_005", "invalid transcation value", 400);
+
     private String code;
     private String message;
     private Integer statusCode;

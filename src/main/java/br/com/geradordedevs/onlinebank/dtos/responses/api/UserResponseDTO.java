@@ -1,12 +1,10 @@
-package br.com.geradordedevs.onlinebank.dtos.responses;
+package br.com.geradordedevs.onlinebank.dtos.responses.api;
 
 import br.com.geradordedevs.onlinebank.enums.DocumentTypeEnum;
 import br.com.geradordedevs.onlinebank.enums.UserTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor

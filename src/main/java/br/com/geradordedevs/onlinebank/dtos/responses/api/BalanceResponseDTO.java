@@ -1,4 +1,4 @@
-package br.com.geradordedevs.onlinebank.dtos.responses;
+package br.com.geradordedevs.onlinebank.dtos.responses.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

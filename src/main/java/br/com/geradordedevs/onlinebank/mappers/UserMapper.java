@@ -1,9 +1,8 @@
 package br.com.geradordedevs.onlinebank.mappers;
 
 import br.com.geradordedevs.onlinebank.dtos.requests.UserRequestDTO;
-import br.com.geradordedevs.onlinebank.dtos.responses.UserResponseDTO;
+import br.com.geradordedevs.onlinebank.dtos.responses.api.UserResponseDTO;
 import br.com.geradordedevs.onlinebank.entities.UserEntity;
-import br.com.geradordedevs.onlinebank.enums.DocumentTypeEnum;
 import br.com.geradordedevs.onlinebank.enums.UserTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;

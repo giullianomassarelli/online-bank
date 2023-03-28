@@ -3,6 +3,7 @@ package br.com.geradordedevs.onlinebank.services.impl;
 import br.com.geradordedevs.onlinebank.entities.UserEntity;
 import br.com.geradordedevs.onlinebank.exceptions.UserException;
 import br.com.geradordedevs.onlinebank.exceptions.enums.UserExceptionEnum;
+import br.com.geradordedevs.onlinebank.repositories.TransactionRepository;
 import br.com.geradordedevs.onlinebank.repositories.UserRepository;
 import br.com.geradordedevs.onlinebank.services.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,16 +18,13 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private TransactionRepository transactionRepository;
+
     @Override
     public UserEntity create(UserEntity userEntity) {
         log.info("create new user : {}",userEntity);
-        return userRepository.save(userEntity);
-    }
-
-    @Override
-    public UserEntity update(UserEntity userEntity, String email) {
-        log.info("update user info : {}", userEntity);
-        userEntity.setEmail(email);
         return userRepository.save(userEntity);
     }
 
@@ -59,6 +57,7 @@ public class UserServiceImpl implements UserService {
     public void deleteAll() {
         log.info("delete all in db");
         userRepository.deleteAll();
+        transactionRepository.deleteAll();
     }
 
 }

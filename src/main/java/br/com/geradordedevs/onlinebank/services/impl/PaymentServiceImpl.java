@@ -13,6 +13,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Autowired
     private OnlinePaymentClient onlinePaymentClient;
+
     @Override
     public OnlinePaymentResponseDTO validatePayment() {
         log.info("verify autorization to payment");

@@ -1,4 +1,4 @@
-package br.com.geradordedevs.onlinebank.dtos.responses;
+package br.com.geradordedevs.onlinebank.dtos.responses.api;
 
 import br.com.geradordedevs.onlinebank.enums.DocumentTypeEnum;
 import br.com.geradordedevs.onlinebank.enums.UserTypeEnum;
@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TransactionResponseDTO {
+
     private String id;
     private String payerEmail;
     private String payeeName;
