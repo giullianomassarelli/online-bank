@@ -21,6 +21,11 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+openfeign:
+  url:
+    online-payment-api: ${OPENFEIGN_URL_ONLINEPAYMENTAPI}
+
+
 
 management:
   endpoint:

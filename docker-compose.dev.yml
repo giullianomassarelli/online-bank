@@ -7,6 +7,7 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=dev
       - SPRING_DATA_MONGODB_URI=mongodb://mongo-online-bank-api:27017/onlineBankApi?retryWrites=true&w=majority
+      - OPENFEIGN_URL_ONLINEPAYMENTAPI=https://run.mocky.io/v3
 
   db:
     image: 'mongo'
