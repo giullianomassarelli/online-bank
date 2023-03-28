@@ -44,6 +44,7 @@ public class ExceptionsControllerAdvice extends ResponseEntityExceptionHandler {
     @ResponseBody
     @ExceptionHandler(UserException.class)
     ResponseEntity<ErrorResponse> handlerUserException(UserException ex) {
+        log.error(ex.toString());
         return ResponseEntity.status(ex.getError().getStatusCode())
                 .body((new ErrorResponse(Instant.now().toEpochMilli(),
                         ex.getError().getStatusCode(),

@@ -42,9 +42,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void verifyUserExist(String email) {
+    public void verifyUserExist(String email, String documentNumber) {
         log.info("verify if user already exist");
-        if (userRepository.findByEmail(email).isPresent()){
+        if (userRepository.findByEmail(email).isPresent() || userRepository.findByDocumentNumbers(documentNumber).isPresent()){
             throw new UserException(UserExceptionEnum.USER_ALREADY_EXIST);
         }
     }

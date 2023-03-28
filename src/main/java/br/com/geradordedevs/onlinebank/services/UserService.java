@@ -12,6 +12,6 @@ public interface UserService {
     UserEntity findByEmail(String email);
     List<UserEntity> findAll ();
 
-    void verifyUserExist (String email);
+    void verifyUserExist (String email, String documentNumber);
 
 }

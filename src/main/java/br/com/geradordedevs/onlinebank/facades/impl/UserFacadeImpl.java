@@ -28,12 +28,12 @@ public class UserFacadeImpl implements UserFacade {
     private UserMapper userMapper;
     @Override
     public UserResponseDTO create(UserRequestDTO userRequestDTO) {
-        validateUserAlreadyExist(userRequestDTO.getEmail());
+        validateUserAlreadyExist(userRequestDTO.getEmail(), userRequestDTO.getDocumentNumbers());
         return userMapper.convertUserEntityToUserResponseDTO(userService.create(userMapper.convertUserRequestDTOTOUserEntity(userRequestDTO)));
     }
 
-    private void validateUserAlreadyExist(String email) {
-        userService.verifyUserExist(email);
+    private void validateUserAlreadyExist(String email, String documentNumbers) {
+        userService.verifyUserExist(email, documentNumbers);
     }
 
     @Override
