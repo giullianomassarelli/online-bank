@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  server:
+    entrypoint: [ "sh", "-c", "java -cp app:app/lib/* br.com.geradordedevs.onlinebank.OnlineBankApplication" ]
+
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo-online-bank-api:27017/onlineBankApi?retryWrites=true&w=majority
+
+  db:
+    image: 'mongo'
+    container_name: mongo-online-bank-api
+    ports:
+      - '27017:27017'
+    volumes:
+      - /home/barry/mongodb/database:/data/db
