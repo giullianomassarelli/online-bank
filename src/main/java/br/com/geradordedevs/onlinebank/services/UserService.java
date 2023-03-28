@@ -14,4 +14,7 @@ public interface UserService {
 
     void verifyUserExist (String email, String documentNumber);
 
+    void updateBalance(UserEntity userEntity);
+
+    void deleteAll();
 }

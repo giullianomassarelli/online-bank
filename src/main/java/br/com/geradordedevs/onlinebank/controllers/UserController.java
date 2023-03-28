@@ -1,6 +1,9 @@
 package br.com.geradordedevs.onlinebank.controllers;
 
+import br.com.geradordedevs.onlinebank.dtos.requests.TransactionRequestDTO;
 import br.com.geradordedevs.onlinebank.dtos.requests.UserRequestDTO;
+import br.com.geradordedevs.onlinebank.dtos.responses.BalanceResponseDTO;
+import br.com.geradordedevs.onlinebank.dtos.responses.TransactionResponseDTO;
 import br.com.geradordedevs.onlinebank.dtos.responses.UserResponseDTO;
 import br.com.geradordedevs.onlinebank.facades.UserFacade;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,5 +37,25 @@ public class UserController {
     @Operation(summary = "populate data base")
     public ResponseEntity<List<UserResponseDTO>> populate (){
         return new ResponseEntity<>(userFacade.populate(), HttpStatus.OK);
+    }
+
+    @GetMapping ("/account-balance")
+    @Operation(summary = "consulting account balance")
+    public ResponseEntity<BalanceResponseDTO> getAccountBalance (@RequestHeader(value = "email") String email){
+        return new ResponseEntity<>(userFacade.getAccountBalance(email), HttpStatus.OK);
+    }
+
+    @PostMapping("/transaction")
+    @Operation(summary = "create new transaction")
+    public ResponseEntity<TransactionResponseDTO> createTransaction (@RequestBody TransactionRequestDTO transactionRequestDTO,
+                                                                     @RequestHeader(value = "email") String email){
+        return new ResponseEntity<>(userFacade.createTransaction(transactionRequestDTO, email), HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping
+    @Operation(summary = "delete all in db")
+    public ResponseEntity<Void> eraseDataBase (){
+        userFacade.deleteAll();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

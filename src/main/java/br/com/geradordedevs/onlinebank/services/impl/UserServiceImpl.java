@@ -49,4 +49,16 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public void updateBalance(UserEntity userEntity) {
+        log.info("updante user balance");
+        userRepository.save(userEntity);
+    }
+
+    @Override
+    public void deleteAll() {
+        log.info("delete all in db");
+        userRepository.deleteAll();
+    }
+
 }
