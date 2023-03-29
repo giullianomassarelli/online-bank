@@ -12,6 +12,7 @@ import br.com.geradordedevs.onlinebank.services.TransactionService;
 import br.com.geradordedevs.onlinebank.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -31,10 +32,16 @@ public class UserFacadeImpl implements UserFacade {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
 
     @Override
     public UserResponseDTO create(UserRequestDTO userRequestDTO) {
         validateUserAlreadyExist(userRequestDTO.getEmail(), userRequestDTO.getDocumentNumbers());
+
+        userRequestDTO.setPassword(passwordEncoder.encode(userRequestDTO.getPassword()));
+
         return userMapper.convertUserEntityToUserResponseDTO(userService.create(userMapper.convertUserRequestDTOTOUserEntity(userRequestDTO)));
     }
 
@@ -53,6 +60,7 @@ public class UserFacadeImpl implements UserFacade {
         userService.create(new UserEntity(null,
                 "Giulliano PF",
                 "massarelli47@gmail.com",
+                passwordEncoder.encode("Abcd@1234"),
                 new BigDecimal("1000"),
                 DocumentTypeEnum.CPF,
                 "366.299.458-59",
@@ -61,6 +69,7 @@ public class UserFacadeImpl implements UserFacade {
         userService.create(new UserEntity(null,
                 "Giulliano PJ",
                 "gm.dev2022@gmail.com",
+                passwordEncoder.encode("Abcd@1234"),
                 new BigDecimal("1000"),
                 DocumentTypeEnum.CNPJ,
                 "47.216.351/0001-06",

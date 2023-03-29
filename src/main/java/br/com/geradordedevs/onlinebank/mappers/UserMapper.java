@@ -20,7 +20,10 @@ public class UserMapper {
     private  ModelMapper modelMapper;
 
     public UserEntity convertUserRequestDTOTOUserEntity (UserRequestDTO userRequestDTO){
-        log.info("convert UserRequestDTO : {}, to UserEntity", userRequestDTO);
+        UserRequestDTO cripPasswordUserRequestDTO = new UserRequestDTO();
+
+        cripPasswordUserRequestDTO.setPassword("**********");
+        log.info("convert UserRequestDTO : {}, to UserEntity", cripPasswordUserRequestDTO);
 
         UserEntity userEntity = modelMapper.map(userRequestDTO, UserEntity.class);
         switch (userEntity.getDocumentType()){
@@ -31,7 +34,11 @@ public class UserMapper {
     }
 
     public UserResponseDTO convertUserEntityToUserResponseDTO (UserEntity userEntity){
-        log.info("convert UserEntity: {}, to UserResponseDTO", userEntity);
+        UserEntity cripPasswordUserEntity = new UserEntity();
+
+        cripPasswordUserEntity.setPassword("**********");
+        log.info("convert UserEntity: {}, to UserResponseDTO", cripPasswordUserEntity);
+
         return modelMapper.map(userEntity, UserResponseDTO.class);
     }
 

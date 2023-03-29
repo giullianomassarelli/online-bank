@@ -1,6 +1,5 @@
 package br.com.geradordedevs.onlinebank.dtos.requests;
 
-import br.com.geradordedevs.onlinebank.enums.DocumentTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,12 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRequestDTO {
+public class LoginRequestDTO {
 
-    private String name;
-    private DocumentTypeEnum documentType;
-    private String documentNumbers;
     private String email;
     private String password;
-
 }

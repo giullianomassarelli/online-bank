@@ -25,6 +25,10 @@ openfeign:
   url:
     online-payment-api: ${OPENFEIGN_URL_ONLINEPAYMENTAPI}
 
+login:
+    jwt:
+      secret: ${LOGIN_JWT_SECRET}
+
 
 
 management:

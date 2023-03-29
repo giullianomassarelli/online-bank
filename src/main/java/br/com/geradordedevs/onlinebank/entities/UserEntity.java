@@ -20,6 +20,7 @@ public class UserEntity {
     private String id;
     private String name;
     private String email;
+    private String password;
     private BigDecimal accountBalance;
     private DocumentTypeEnum documentType;
     private String documentNumbers;
