@@ -25,10 +25,10 @@ public class UserController {
         return new ResponseEntity<>(userFacade.create(userRequestDTO), HttpStatus.CREATED);
     }
 
-    @GetMapping("/find-user")
-    @Operation(summary = "find user by email")
-    public ResponseEntity<UserResponseDTO> findByEmail (@RequestHeader(value = "email") String email){
-        return new ResponseEntity<>(userFacade.findByEmail(email), HttpStatus.OK);
+    @GetMapping("/my-info")
+    @Operation(summary = "get user info")
+    public ResponseEntity<UserResponseDTO> findByToken (@RequestHeader(value = "token") String token){
+        return new ResponseEntity<>(userFacade.findByToken(token), HttpStatus.OK);
     }
 
     @PostMapping ("/populate")
@@ -39,8 +39,8 @@ public class UserController {
 
     @GetMapping ("/account-balance")
     @Operation(summary = "consulting account balance")
-    public ResponseEntity<BalanceResponseDTO> getAccountBalance (@RequestHeader(value = "email") String email){
-        return new ResponseEntity<>(userFacade.getAccountBalance(email), HttpStatus.OK);
+    public ResponseEntity<BalanceResponseDTO> getAccountBalance (@RequestHeader(value = "token") String token){
+        return new ResponseEntity<>(userFacade.getAccountBalance(token), HttpStatus.OK);
     }
 
     @DeleteMapping

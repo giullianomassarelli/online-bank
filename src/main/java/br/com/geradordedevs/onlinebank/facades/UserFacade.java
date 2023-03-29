@@ -9,8 +9,8 @@ import java.util.List;
 public interface UserFacade {
 
     UserResponseDTO create (UserRequestDTO userRequestDTO);
-    UserResponseDTO findByEmail (String email);
+    UserResponseDTO findByToken (String token);
     List<UserResponseDTO> populate ();
-    BalanceResponseDTO getAccountBalance(String email);
+    BalanceResponseDTO getAccountBalance(String token);
     void deleteAll();
 }

@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface TransactionFacade {
 
-    List<TransactionResponseDTO> getAll (String email);
-    TransactionResponseDTO createTransaction(TransactionRequestDTO transactionRequestDTO, String email);
+    List<TransactionResponseDTO> getAll (String token);
+    TransactionResponseDTO createTransaction(TransactionRequestDTO transactionRequestDTO, String token);
 }

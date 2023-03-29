@@ -20,15 +20,15 @@ public class TransactionController {
 
     @GetMapping
     @Operation(summary = "get all transaction by email")
-    public ResponseEntity<List<TransactionResponseDTO>> getAll (@RequestHeader(value = "email") String email){
-        return new ResponseEntity<>(transactionFacade.getAll(email), HttpStatus.OK);
+    public ResponseEntity<List<TransactionResponseDTO>> getAll (@RequestHeader(value = "token") String token){
+        return new ResponseEntity<>(transactionFacade.getAll(token), HttpStatus.OK);
     }
 
     @PostMapping("/send-money")
     @Operation(summary = "create new transaction")
     public ResponseEntity<TransactionResponseDTO> createTransaction (@RequestBody TransactionRequestDTO transactionRequestDTO,
-                                                                     @RequestHeader(value = "email") String email){
-        return new ResponseEntity<>(transactionFacade.createTransaction(transactionRequestDTO, email), HttpStatus.ACCEPTED);
+                                                                     @RequestHeader(value = "token") String token){
+        return new ResponseEntity<>(transactionFacade.createTransaction(transactionRequestDTO, token), HttpStatus.ACCEPTED);
     }
 
 }

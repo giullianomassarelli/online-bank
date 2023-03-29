@@ -9,6 +9,7 @@ import br.com.geradordedevs.onlinebank.exceptions.TransactionException;
 import br.com.geradordedevs.onlinebank.exceptions.enums.TransactionExceptionEnum;
 import br.com.geradordedevs.onlinebank.facades.TransactionFacade;
 import br.com.geradordedevs.onlinebank.mappers.TransactionMapper;
+import br.com.geradordedevs.onlinebank.services.LoginService;
 import br.com.geradordedevs.onlinebank.services.PaymentService;
 import br.com.geradordedevs.onlinebank.services.TransactionService;
 import br.com.geradordedevs.onlinebank.services.UserService;
@@ -36,16 +37,22 @@ public class TransactionFacadeImpl implements TransactionFacade {
     @Autowired
     private PaymentService paymentService;
 
+    @Autowired
+    private LoginService loginService;
+
     private final String AUTH_MESSAGE = "Autorizado";
 
     @Override
-    public List<TransactionResponseDTO> getAll(String email) {
+    public List<TransactionResponseDTO> getAll(String token) {
+        String email = loginService.verifyToken(token);
         return transactionMapper.convertTransactionEntityListToTransactionResponseDTOList(transactionService.getAll(), email);
     }
 
     @Override
-    public TransactionResponseDTO createTransaction(TransactionRequestDTO transactionRequestDTO, String email) {
-        log.info("create new transaction: {}, by user : {}", transactionRequestDTO, email);
+    public TransactionResponseDTO createTransaction(TransactionRequestDTO transactionRequestDTO, String token) {
+        log.info("create new transaction: {}", transactionRequestDTO);
+
+        String email = loginService.verifyToken(token);
 
         UserEntity userEntity = userService.findByEmail(transactionRequestDTO.getPayeeEmail());
         userEntity.setAccountBalance(transactionRequestDTO.getPaymentValue().add(userEntity.getAccountBalance()));

@@ -8,6 +8,7 @@ import br.com.geradordedevs.onlinebank.enums.DocumentTypeEnum;
 import br.com.geradordedevs.onlinebank.enums.UserTypeEnum;
 import br.com.geradordedevs.onlinebank.facades.UserFacade;
 import br.com.geradordedevs.onlinebank.mappers.UserMapper;
+import br.com.geradordedevs.onlinebank.services.LoginService;
 import br.com.geradordedevs.onlinebank.services.TransactionService;
 import br.com.geradordedevs.onlinebank.services.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +36,9 @@ public class UserFacadeImpl implements UserFacade {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
+    private LoginService loginService;
+
 
     @Override
     public UserResponseDTO create(UserRequestDTO userRequestDTO) {
@@ -50,7 +54,8 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public UserResponseDTO findByEmail(String email) {
+    public UserResponseDTO findByToken(String token) {
+        String email = loginService.verifyToken(token);
         return userMapper.convertUserEntityToUserResponseDTO(userService.findByEmail(email));
     }
 
@@ -79,7 +84,9 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public BalanceResponseDTO getAccountBalance(String email) {
+    public BalanceResponseDTO getAccountBalance(String token) {
+        String email = loginService.verifyToken(token);
+
         log.info("consult account balance : {}", email);
         BalanceResponseDTO balanceResponseDTO = new BalanceResponseDTO();
         UserEntity userEntity = userService.findByEmail(email);
