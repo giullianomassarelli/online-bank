@@ -9,10 +9,7 @@ import br.com.geradordedevs.onlinebank.exceptions.TransactionException;
 import br.com.geradordedevs.onlinebank.exceptions.enums.TransactionExceptionEnum;
 import br.com.geradordedevs.onlinebank.facades.TransactionFacade;
 import br.com.geradordedevs.onlinebank.mappers.TransactionMapper;
-import br.com.geradordedevs.onlinebank.services.LoginService;
-import br.com.geradordedevs.onlinebank.services.PaymentService;
-import br.com.geradordedevs.onlinebank.services.TransactionService;
-import br.com.geradordedevs.onlinebank.services.UserService;
+import br.com.geradordedevs.onlinebank.services.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,6 +36,9 @@ public class TransactionFacadeImpl implements TransactionFacade {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private NotificationService notificationService;
 
     private final String AUTH_MESSAGE = "Autorizado";
 
@@ -68,7 +68,11 @@ public class TransactionFacadeImpl implements TransactionFacade {
 
         if (paymentService.validatePayment().getMessage().equals(AUTH_MESSAGE)) {
             userService.updateBalance(userEntity);
-            return transactionMapper.convertTransactionEntityToTransactionResponseDTO(transactionService.save(transactionEntity));
+            TransactionResponseDTO transactionResponseDTO = transactionMapper.convertTransactionEntityToTransactionResponseDTO(transactionService.save(transactionEntity));
+
+            notificationService.sendEmail(transactionEntity.getPayerEmail(), transactionEntity.getPayeeEmail(), transactionEntity.getPaymentValue());
+
+            return transactionResponseDTO;
         } else {
             throw new TransactionException(TransactionExceptionEnum.UNAUTHORIZED_PAYMENT);
         }

@@ -1,6 +1,7 @@
 package br.com.geradordedevs.onlinebank.exceptions.handlers;
 
 import br.com.geradordedevs.onlinebank.exceptions.LoginException;
+import br.com.geradordedevs.onlinebank.exceptions.NotificationException;
 import br.com.geradordedevs.onlinebank.exceptions.TransactionException;
 import br.com.geradordedevs.onlinebank.exceptions.UserException;
 import br.com.geradordedevs.onlinebank.exceptions.models.ErrorObject;
@@ -68,6 +69,17 @@ public class ExceptionsControllerAdvice extends ResponseEntityExceptionHandler {
     @ResponseBody
     @ExceptionHandler(LoginException.class)
     ResponseEntity<ErrorResponse> handlerLoginException(LoginException ex) {
+        log.error(ex.toString());
+        return ResponseEntity.status(ex.getError().getStatusCode())
+                .body((new ErrorResponse(Instant.now().toEpochMilli(),
+                        ex.getError().getStatusCode(),
+                        ex.getError().getCode(),
+                        ex.getMessage(), new ArrayList<>())));
+    }
+
+    @ResponseBody
+    @ExceptionHandler(NotificationException.class)
+    ResponseEntity<ErrorResponse> handlerNotificationException(NotificationException ex) {
         log.error(ex.toString());
         return ResponseEntity.status(ex.getError().getStatusCode())
                 .body((new ErrorResponse(Instant.now().toEpochMilli(),
