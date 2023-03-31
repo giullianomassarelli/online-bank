@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  server:
+    entrypoint: [ "sh", "-c", "java -cp app:app/lib/* br.com.geradordedevs.onlinebank.OnlineBankApplication" ]
+
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo-online-bank-api:27017/onlineBankApi?retryWrites=true&w=majority
+      - OPENFEIGN_URL_ONLINEPAYMENTAPI=https://run.mocky.io/v3
+      - LOGIN_JWT_SECRET=22CD7B34F334BCEFE92C8AAD439B5
+
+  db:
+    image: 'mongo'
+    container_name: mongo-online-bank-api
+    ports:
+      - '27017:27017'
+    volumes:
+      - /home/barry/mongodb/database:/data/db

@@ -29,14 +29,23 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.0.4'
+
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.0'
+
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '3.0.0'
+	testImplementation 'org.springframework.security:spring-security-test:6.0.2'
+	implementation group: 'com.auth0', name: 'java-jwt', version: '4.2.1'
+
+	implementation group: 'org.apache.commons', name: 'commons-email', version: '1.5'
+
+	testImplementation 'org.powermock:powermock-module-junit4:2.0.2'
+	testImplementation 'org.powermock:powermock-api-mockito2:2.0.2'
 }
 
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
 }

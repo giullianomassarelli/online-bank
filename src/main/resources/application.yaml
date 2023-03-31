@@ -1,0 +1,52 @@
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+swagger:
+  contact:
+    name: Giulliano Massarelli
+    email: "giuliano.massarelli@geradordedevs.com.br"
+  app:
+    name: Online Bank API
+    version: 0.0.1
+    description: Challanger API to Studys
+  base:
+    package: br.com.geradordedevs.onlinebank
+
+spring:
+  data:
+    mongodb:
+      uri: ${SPRING_DATA_MONGODB_URI}
+      
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+openfeign:
+  url:
+    online-payment-api: ${OPENFEIGN_URL_ONLINEPAYMENTAPI}
+
+login:
+    jwt:
+      secret: ${LOGIN_JWT_SECRET}
+
+
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      base-path:
+      path-mapping:
+        health: /healthcheck
+
+email:
+  smpt-port: 584
+  host-name: smtp.gmail.com
+  user: gm.dev2022@gmail.com
+  password: jgntapazcnvswuwe
+  from: not-answer@no-reply.com
+  subject: ONLINE BANK S.A - DO NOT ANSWER THIS EMAIL
+
+
