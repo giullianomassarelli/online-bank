@@ -6,7 +6,7 @@ swagger:
     name: Giulliano Massarelli
     email: "giuliano.massarelli@geradordedevs.com.br"
   app:
-    name: Notification API
+    name: Online Bank API
     version: 0.0.1
     description: Challanger API to Studys
   base:

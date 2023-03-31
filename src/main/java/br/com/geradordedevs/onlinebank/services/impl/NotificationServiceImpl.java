@@ -1,6 +1,5 @@
 package br.com.geradordedevs.onlinebank.services.impl;
 
-import br.com.geradordedevs.onlinebank.entities.TransactionEntity;
 import br.com.geradordedevs.onlinebank.exceptions.NotificationException;
 import br.com.geradordedevs.onlinebank.exceptions.enums.NotificationExceptionEnum;
 import br.com.geradordedevs.onlinebank.services.NotificationService;
@@ -37,8 +36,8 @@ public class NotificationServiceImpl implements NotificationService {
 
     private final String START_TEXT = "We register a new transfer made by you to : ";
 
-    private final String END_TEXT = " \nin the amount of : ";
-    private final String HELLP_TEXT = " \nif you don't remember what you did, please contact us by phone (0800-9999999) ";
+    private final String END_TEXT = " \nIn the amount of : ";
+    private final String HELP_TEXT = " \nIf you don't did this, please contact us by phone (0800-9999999) ";
 
     @Override
     public void sendEmail(String payerEmail, String payeeEmail, BigDecimal paymentValue) {
@@ -52,7 +51,7 @@ public class NotificationServiceImpl implements NotificationService {
             simpleEmail.addTo(payerEmail);
             simpleEmail.setFrom(from);
             simpleEmail.setSubject(subject);
-            simpleEmail.setMsg(START_TEXT + payeeEmail + END_TEXT + paymentValue + HELLP_TEXT );
+            simpleEmail.setMsg(START_TEXT + payeeEmail + END_TEXT + paymentValue + HELP_TEXT );
 
             simpleEmail.send();
             log.info("email successfully sent");
