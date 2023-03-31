@@ -5,6 +5,7 @@ import br.com.geradordedevs.onlinebank.dtos.responses.api.BalanceResponseDTO;
 import br.com.geradordedevs.onlinebank.dtos.responses.api.UserResponseDTO;
 import br.com.geradordedevs.onlinebank.facades.UserFacade;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class UserController {
 
     @PostMapping
     @Operation(summary = "create new user")
-    public ResponseEntity<UserResponseDTO> create (@RequestBody UserRequestDTO userRequestDTO){
+    public ResponseEntity<UserResponseDTO> create (@Valid @RequestBody UserRequestDTO userRequestDTO){
         return new ResponseEntity<>(userFacade.create(userRequestDTO), HttpStatus.CREATED);
     }
 
