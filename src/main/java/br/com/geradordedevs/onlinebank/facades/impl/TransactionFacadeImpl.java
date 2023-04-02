@@ -70,7 +70,7 @@ public class TransactionFacadeImpl implements TransactionFacade {
             userService.updateBalance(userEntity);
             TransactionResponseDTO transactionResponseDTO = transactionMapper.convertTransactionEntityToTransactionResponseDTO(transactionService.save(transactionEntity));
 
-            notificationService.sendEmail(transactionEntity.getPayerEmail(), transactionEntity.getPayeeEmail(), transactionEntity.getPaymentValue());
+           // notificationService.sendEmail(transactionEntity.getPayerEmail(), transactionEntity.getPayeeEmail(), transactionEntity.getPaymentValue());
 
             return transactionResponseDTO;
         } else {
