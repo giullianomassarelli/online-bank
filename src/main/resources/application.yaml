@@ -44,8 +44,8 @@ management:
 email:
   smpt-port: 584
   host-name: smtp.gmail.com
-  user: gm.dev2022@gmail.com
-  password: jgntapazcnvswuwe
+  user: 
+  password: 
   from: not-answer@no-reply.com
   subject: ONLINE BANK S.A - DO NOT ANSWER THIS EMAIL
 
